@@ -1,0 +1,148 @@
+/* variables.css - Colores y constantes */
+:root {
+  --bg-dark: #121417;          /* Fondo principal */
+  --card-bg: #1c1f26;          /* Fondo de los módulos/tarjetas */
+  --sidebar-bg: #171a21;       /* Fondo de la barra lateral */
+  --text-main: #e0e0e0;        /* Texto principal */
+  --text-muted: #8b949e;       /* Texto secundario/labels */
+  --accent-cyan: #40e0d0;      /* Color de acento cian */
+  --accent-green: #39ff14;     /* Acento verde neón */
+  --accent-purple: #bd00ff;    /* Acento púrpura */
+  --border-color: #2d333b;     /* Bordes de tarjetas */
+  --radius: 12px;
+}
+
+/* Reset y Base */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
+  display: flex;
+}
+
+/* Layout del Dashboard */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Sidebar (Barra Lateral) */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  padding: 20px;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-item {
+  color: var(--text-muted);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+  background-color: rgba(64, 224, 208, 0.1);
+  color: var(--accent-cyan);
+}
+
+/* Main Content Area */
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+/* Estilo de Tarjetas/Módulos */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Gráficos Circulares (Donut Charts) */
+.donut-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid #2d333b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-cyan);
+}
+
+/* Tablas y Listas */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.data-table th {
+  text-align: left;
+  color: var(--text-muted);
+  padding: 8px;
+}
+
+.data-table td {
+  padding: 8px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Botones y Elementos de Acción */
+.btn-primary {
+  background-color: var(--accent-cyan);
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Indicadores de Status (Pequeñas bolitas) */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.status-online { background-color: var(--accent-green); }
+.status-warning { background-color: #ffaa00; }
+.status-error { background-color: #ff4444; }

@@ -1,0 +1,49 @@
+// src/pages/Dashboard.jsx
+import React from 'react';
+import OverallNetworkHealthCard from '../components/Cards/OverallNetworkHealthCard';
+
+function Dashboard() {
+  return (
+    <main className="p-6 bg-[#020617] min-h-screen text-slate-300">
+      {/* Grid Principal: 2 columnas en pantallas grandes */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        {/* SECCIÓN: Config & Deployment */}
+        <section className="space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Config & Deployment</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <OverallNetworkHealthCard />
+            {/* Aquí irían ResponseTimeCard, FirmwareUpdates, etc. */}
+            <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-40">Placeholder Card</div>
+          </div>
+        </section>
+
+        {/* SECCIÓN: Performance & Health */}
+        <section className="space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Performance & Health</h2>
+          <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-64">
+             {/* Aquí iría el NetworkTopologyCard (el mapa de nodos) */}
+             <p className="text-cyan-400">Network Topology View</p>
+          </div>
+        </section>
+
+        {/* SECCIÓN: Security & Access */}
+        <section className="space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Security & Access</h2>
+          <div className="grid grid-cols-1 gap-4">
+             <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-40">Security Alerts List</div>
+          </div>
+        </section>
+
+        {/* SECCIÓN: Troubleshooting */}
+        <section className="space-y-4">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Troubleshooting</h2>
+          <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-40">Real-time Logs</div>
+        </section>
+
+      </div>
+    </main>
+  );
+}
+
+export default Dashboard;
