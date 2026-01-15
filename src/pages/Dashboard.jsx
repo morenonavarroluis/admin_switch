@@ -1,6 +1,7 @@
 // src/pages/Dashboard.jsx
 import React from 'react';
 import OverallNetworkHealthCard from '../components/Cards/OverallNetworkHealthCard';
+import TroubleshootingModule from '../components/TroubleshootingModule';
 
 function Dashboard() {
   return (
@@ -24,6 +25,7 @@ function Dashboard() {
           <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-64">
              {/* Aquí iría el NetworkTopologyCard (el mapa de nodos) */}
              <p className="text-cyan-400">Network Topology View</p>
+            
           </div>
         </section>
 
@@ -40,9 +42,10 @@ function Dashboard() {
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">Troubleshooting</h2>
           <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-4 h-40">Real-time Logs</div>
         </section>
-
+ <TroubleshootingModule/>
       </div>
     </main>
+    
   );
 }
 
