@@ -1,9 +1,18 @@
 // src/pages/Dashboard.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import OverallNetworkHealthCard from '../components/Cards/OverallNetworkHealthCard';
 import TroubleshootingModule from '../components/TroubleshootingModule';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem('userAuthenticated');
+    if (!auth) {
+      navigate('/login'); // Si no hay auth, bótalo al login
+    }
+  }, []);
+
   return (
     <main className="p-6 bg-[#020617] min-h-screen text-slate-300">
       {/* Grid Principal: 2 columnas en pantallas grandes */}

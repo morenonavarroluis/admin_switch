@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Database, Shield, Settings, Activity, Server, Lock } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Database, Shield, Settings, Activity, Server, Lock,LogOut } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation(); // Para marcar el item activo
-
+  const navigate = useNavigate();
   const menuItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={18} /> },
     { name: 'Inventory', path: '/inventory', icon: <Database size={18} /> },
@@ -13,7 +13,11 @@ const Sidebar = () => {
     { name: 'Devices', path: '/devices', icon: <Server size={18} /> },
     { name: 'Access Control', path: '/access', icon: <Lock size={18} /> },
   ];
-
+   const handleLogout = () => {
+    localStorage.removeItem('userAuthenticated');
+    localStorage.removeItem('userName');
+    navigate('/login');
+  };
   return (
     <aside className="w-64 bg-[#0f172a] border-r border-slate-800 flex flex-col h-screen sticky top-0">
       {/* Header del Sidebar */}
@@ -54,6 +58,14 @@ const Sidebar = () => {
         <button className="flex items-center gap-3 px-3 py-2 w-full text-slate-400 hover:text-white transition-colors">
           <Settings size={18} />
           <span className="text-sm">Settings</span>
+        </button>
+
+        <button 
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-3 py-2 w-full text-red-400 hover:bg-red-500/10 rounded-md transition-all group"
+        >
+          <LogOut size={18} className="group-hover:translate-x-1 transition-transform" />
+          <span className="text-sm font-medium">Cerrar Sesión</span>
         </button>
       </div>
     </aside>

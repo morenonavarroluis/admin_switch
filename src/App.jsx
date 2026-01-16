@@ -1,27 +1,43 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './Login';
 import Dashboard from './pages/Dashboard';
 import Sidebar from './components/Layout/Sidebar';
 import Header from './components/Layout/Header';
 
+// Creamos un componente para envolver las páginas que SÍ llevan Sidebar
+const AdminLayout = ({ children }) => (
+  <div className="flex h-screen bg-[#020617] overflow-hidden">
+    <Sidebar />
+    <div className="flex-1 flex flex-col overflow-y-auto">
+      <Header />
+      <div className="p-4">
+        {children}
+      </div>
+    </div>
+  </div>
+);
+
 function App() {
   return (
     <Router>
-      {/* Añadimos flex y h-screen para que ocupe toda la pantalla */}
-      <div className="flex h-screen bg-[#020617] overflow-hidden">
-        <Sidebar />
-        
-        {/* Este contenedor debe crecer (flex-1) y tener scroll independiente */}
-        <div className="flex-1 flex flex-col overflow-y-auto">
-          <Header />
-          <div className="p-4">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
+      <Routes>
+        {/* RUTA INDEPENDIENTE: Sin Sidebar ni Header */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* RUTAS CON LAYOUT: Aquí envolvemos el Dashboard */}
+        <Route 
+          path="/dashboard" 
+          element={
+            <AdminLayout>
+              <Dashboard />
+            </AdminLayout>
+          } 
+        />
+
+        {/* Redirección por defecto */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
     </Router>
   );
 }
