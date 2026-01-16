@@ -1,21 +1,16 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from scapy.all import ARP, Ether, srp
+from .controller.scan_network import scan_network
 from fastapi.middleware.cors import CORSMiddleware
-
+from .model.model import LoginRequest
 app = FastAPI()
 
-# Configuración de CORS para que React pueda comunicarse con FastAPI
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], # En producción cambia esto a la URL de tu app React
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Modelo de datos para el login
-class LoginRequest(BaseModel):
-    username: str
-    password: str
 
 @app.post("/login")
 async def login(data: LoginRequest):
@@ -29,6 +24,18 @@ async def login(data: LoginRequest):
         }
     
     raise HTTPException(status_code=401, detail="Credenciales incorrectas")
+
+
+@app.get("/scan")
+async def get_devices(range: str = "10.20.22.83/30"):
+    try:
+        devices = scan_network(range)
+        return {
+            "total_devices": len(devices),
+            "devices": devices
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
